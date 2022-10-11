@@ -1,0 +1,14 @@
+{% extends 'main/main.html' %}
+{% block content %}
+
+<h1> Task FORM </h1>
+
+<a href="{% url 'tasks' %}"> Back </a>
+
+<form style="display: flex; flex-direction: column; width:15%" method="POST" action="">
+    {% csrf_token %}
+    {{form}}
+    <input type="submit" value="Submit">
+</form>
+
+{% endblock content %}
