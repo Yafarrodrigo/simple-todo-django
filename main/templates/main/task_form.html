@@ -2,17 +2,30 @@
 {% block content %}
 
 {% load bootstrap5 %}
-
-<a href="{% url 'tasks' %}"> Back </a>
+<header class="p-3 bg-dark">
+    <div class="container d-flex justify-content-end">
+        <a href="{% url 'tasks' %}"> <button type="button" class="btn btn-lg btn-warning">Back</button> </a>
+    </div>
+</header>
 
 <div class="container w-50">
     <div class="row my-5">
         <div class="col-md-12">
             <form method="POST" class="form">
-                <h1> Task FORM </h1>
+                <h1 class="text-primary w-100"> 
+                    {% if edit == True %}
+                    Update Task
+                    {% else %}
+                    Create Task
+                    {% endif %} 
+                </h1>  
                 {% csrf_token %}
                 {% bootstrap_form form %}
-                <input type="submit" value="Submit">
+                <input type="submit" class="btn btn-primary" value={% if edit == True %}
+                "Update"
+                {% else %}
+                "Create"
+                {% endif %} >
             </form>
         </div>
     </div>

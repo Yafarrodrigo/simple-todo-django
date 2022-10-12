@@ -78,6 +78,11 @@ class TaskUpdate(LoginRequiredMixin, UpdateView):
     fields = ['title', 'desc']
     success_url = reverse_lazy('tasks')
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['edit'] = True
+        return context
+
 class TaskDelete(LoginRequiredMixin, DeleteView):
     model = Task
     context_object_name = 'task'

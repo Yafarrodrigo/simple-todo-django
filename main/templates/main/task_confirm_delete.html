@@ -1,11 +1,25 @@
 {% extends 'main/main.html' %}
 {% block content %}
 
-<a href="{% url 'tasks' %}"> Back </a>
-<form method="POST">
-    {% csrf_token %} 
-    <p>Are you sure that you want to delete this task !? "{{task}}" </p>
-    <input type="submit" value="Delete!">
-</form>
+<header class="p-3 bg-dark">
+    <div class="container d-flex justify-content-end">
+        <a href="{% url 'tasks' %}"> <button type="button" class="btn btn-lg btn-warning">Back</button> </a>
+    </div>
+</header>
+
+<div class="container w-100">
+    <div class="row my-5">
+        <div class="col-md-12">
+            <form method="POST">
+                {% csrf_token %} 
+                <p class="text-primary">Are you sure that you want to delete this task !? </p>
+                <p class="text-primary">"{{task}}"</p>
+                <input type="submit" class="btn btn-danger" value="Delete!">
+            </form>
+        </div>
+    </div>
+</div>
+
+
 
 {% endblock content %}

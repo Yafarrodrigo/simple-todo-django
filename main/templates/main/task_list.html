@@ -22,7 +22,7 @@
                 <div class="input-group">
                     <input class="form-control" type="text" name="search-area" value="{{search_input}}">
                     <div class="input-group-append">
-                        <input class="form-control" type="submit" value="seach">
+                        <input class="form-control btn btn-primary" type="submit" value="search">
                     </div>
                 </div>
             </form>
@@ -45,21 +45,28 @@
     </div>
 </header>
 
-<h1>My ToDo List</h1>
+<div class="container w-100">
+    <div class="row my-5">
+        <div class="col-md-12">
+            <h1 class="text-primary mb-3">My ToDo List</h1>
+            {% for task in tasks %}
+            <div  onclick='location.href="{% url 'task' task.id %}";'
+                class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start bg-light mt-1 px-0 rounded-2"
+                style="cursor:pointer">
 
-
-
-
-<div class="container">
-        {% for task in tasks %}
-        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start bg-light mt-1 px-0 rounded-2">
-            <div class="me-auto mx-2">{{task.title}}</div>
-            <div><a href="{% url 'update' task.id %}"><button type="button" class="btn btn-warning">Edit</button></a></div>
-            <div><a href="{% url 'delete' task.id %}"><button type="button" class="btn btn-danger px-1">Delete</button></a></div>
+                <div class="me-auto mx-2 user-select-none fw-bold">{{task.title}}
+                    {% if task.desc|length > 0 %}
+                    <span class="text-muted">({{task.desc}})</span>
+                    {% endif %}
+                </div>
+                <div><a href="{% url 'update' task.id %}"><button type="button" class="btn btn-warning user-select-none">Edit</button></a></div>
+                <div><a href="{% url 'delete' task.id %}"><button type="button" class="btn btn-danger px-1 user-select-none">Delete</button></a></div>
+            </div>
+            {% empty %}
+                <h3> No items in list! </h3>
+            {% endfor %}
         </div>
-        {% empty %}
-            <h3> No items in list! </h3>
-        {% endfor %}
+    </div>
 </div>
 
 

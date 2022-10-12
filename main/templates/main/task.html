@@ -1,10 +1,20 @@
 {% extends 'main/main.html' %}
 {% block content %}
 
-<h1> Task: {{task}} </h1>
-<h3> description: {{ task.desc }} </h3>
-<h3> completed: {{task.complete}} </h3>
+<header class="p-3 bg-dark">
+    <div class="container d-flex justify-content-end">
+        <a href="{% url 'tasks' %}"> <button type="button" class="btn btn-lg btn-warning">Back</button> </a>
+    </div>
+</header>
 
-<a href="{% url 'tasks' %}"> Back </a>
+<div class="container w-100">
+    <div class="row my-5">
+        <div class="col-md-12">
+            <h1 class="text-primary"> Task: {{task}} </h1>
+            <h3 class="text-primary"> description: {{ task.desc }} </h3>
+            <h3 class="text-primary"> completed: {{task.complete}} </h3>
+        </div>
+    </div>
+</div>
 
 {% endblock content %}
