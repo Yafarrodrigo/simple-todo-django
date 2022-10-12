@@ -1,14 +1,23 @@
 {% extends 'main/main.html' %}
 {% block content %}
 
-<h1>Register!</h1>
+{% load bootstrap5 %}
 
-<form method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Register">
-</form>
-
-<a href="{% url 'login' %}">Login!</a>
+<div class="container w-25">
+    <div class="row my-5">
+        <div class="col-md-12">
+            <form method="POST" class="form">
+                {% csrf_token %}
+                <div class="form-control py-5">
+                    <h1>Login!</h1>
+                    {% bootstrap_form form %}
+                    <input type="submit" value="Register" class="btn btn-primary mt-5">
+                    <br>
+                    <a href="{% url 'login' %}" class="my-2"><button type="button" class="btn btn-primary my-3"> already have an account? </button></a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
 {% endblock content %}

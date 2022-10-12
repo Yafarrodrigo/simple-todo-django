@@ -1,38 +1,66 @@
 {% extends 'main/main.html' %}
 {% block content %}
 
-{%if request.user.is_authenticated %}
-    <p>user: {{request.user}}</p>
-    <a href="{% url 'logout' %}">Logout</a>
-{% else %}
-    <a href="{% url 'login' %}">Login</a>
-{% endif %}
+{% load bootstrap5 %}
+
+<header class="p-3 text-bg-dark">
+    <div class="container">
+        <div class="d-flex row flex-wrap align-items-center justify-content-center justify-content-lg-start">
+            <ul class="nav col-lg-4 col-sm-12 ">
+                <li>
+                    <a class="nav-link px-2 text-secondary" href="/">Home</a>
+                </li>
+                <li>
+                    <a href="{% url 'create' %}" class="nav-link px-2 text-secondary">Create Task</a>
+                </li>
+                <li>
+                    <a class="nav-link px-2 text-secondary" href="/">About</a>
+                </li>
+            </ul>
+
+            <form method="GET" class="col-lg-4 col-sm-12">
+                <div class="input-group">
+                    <input class="form-control" type="text" name="search-area" value="{{search_input}}">
+                    <div class="input-group-append">
+                        <input class="form-control" type="submit" value="seach">
+                    </div>
+                </div>
+            </form>
+
+            <div class="text-end col-lg-4 col-sm-12">
+                {%if request.user.is_authenticated %}
+                <span class="text-warning bg-dark">{{request.user}}
+                    <a href="{% url 'logout' %}">
+                        <button class="btn btn-warning mx-2">
+                            Logout
+                        </button>
+                    </a>
+                </span>
+                
+                {% else %}
+                    <a href="{% url 'login' %}">Login</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</header>
 
 <h1>My ToDo List</h1>
 
-<a href="{% url 'create' %}"> Create Task </a>
 
-<form method="GET">
-    <input type="text" name="search-area" value="{{search_input}}">
-    <input type="submit" value="seach">
-</form>
 
-<table>
-    <tr>
-        <th></th>
-        <th></th>
-        <th></th>
-    </tr>
-    <hr>
-    {% for task in tasks %}
-    <tr>
-        <td>{{task.title}}</td>
-        <td><a href="{% url 'update' task.id %}">Edit</td>
-        <td><a href="{% url 'delete' task.id %}">Delete</td>
-    </tr>
-    {% empty %}
-        <h3> No items in list! </h3>
-    {% endfor %}
-</table>
+
+<div class="container">
+        {% for task in tasks %}
+        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start bg-light mt-1 px-0 rounded-2">
+            <div class="me-auto mx-2">{{task.title}}</div>
+            <div><a href="{% url 'update' task.id %}"><button type="button" class="btn btn-warning">Edit</button></a></div>
+            <div><a href="{% url 'delete' task.id %}"><button type="button" class="btn btn-danger px-1">Delete</button></a></div>
+        </div>
+        {% empty %}
+            <h3> No items in list! </h3>
+        {% endfor %}
+</div>
+
 
 {% endblock content %}
